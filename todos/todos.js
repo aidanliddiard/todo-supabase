@@ -26,6 +26,10 @@ async function displayTodos() {
     // display the list of todos
     for (let todo of todos) {
         const li = renderTodo(todo);
+        li.addEventListener('click', ()=>{
+            console.log('clicked');
+            displayTodos();
+        });
         todoList.append(li);
     }
     // be sure to give each todo an event listener
