@@ -10,10 +10,11 @@ import { renderTodo } from '../render-utils.js';
 
 checkAuth();
 
-const todosEl = document.querySelector('.todos');
+const todosEl = document.querySelector('.todo');
 const todoForm = document.querySelector('.todo-form');
 const logoutButton = document.querySelector('#logout');
 const deleteButton = document.querySelector('.delete-button');
+const todoList = document.getElementById('todo-list');
 
 todoForm.addEventListener('submit', async(e) => {
     // on submit, create a todo, reset the form, and display the todos
@@ -21,14 +22,18 @@ todoForm.addEventListener('submit', async(e) => {
 
 async function displayTodos() {
     // fetch the todos
-    
+    const todos = await getTodos();
     // display the list of todos
-
+    for (let todo of todos) {
+        const li = renderTodo(todo);
+        todoList.append(li);
+    }
     // be sure to give each todo an event listener
-
     // on click, complete that todo
+    
 }
 
+displayTodos();
 // add an on load listener that fetches and displays todos on load
 
 logoutButton.addEventListener('click', () => {
