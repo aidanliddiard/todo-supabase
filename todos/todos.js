@@ -10,7 +10,6 @@ import { renderTodo } from '../render-utils.js';
 
 checkAuth();
 
-const todosEl = document.querySelector('.todo');
 const todoForm = document.querySelector('.todo-form');
 const logoutButton = document.querySelector('#logout');
 const deleteButton = document.querySelector('.delete-button');
@@ -35,7 +34,7 @@ async function displayTodos() {
     // display the list of todos
     for (let todo of todos) {
         const li = renderTodo(todo);
-        li.addEventListener('click', async () => {
+        li.addEventListener('click', async() => {
             // console.log('clicked');
             await completeTodo(todo.id);
             displayTodos();
