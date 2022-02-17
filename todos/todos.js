@@ -18,16 +18,26 @@ const todoList = document.getElementById('todo-list');
 
 todoForm.addEventListener('submit', async(e) => {
     // on submit, create a todo, reset the form, and display the todos
+    e.preventDefault();
+    
+    const data = new FormData(todoForm);
+    //console.log(data.get('todo'));
+    await createTodo(data.get('todo'));
+    displayTodos();
+    todoForm.reset();
+
 });
 
 async function displayTodos() {
     // fetch the todos
+    todoList.textContent = '';
     const todos = await getTodos();
     // display the list of todos
     for (let todo of todos) {
         const li = renderTodo(todo);
-        li.addEventListener('click', ()=>{
-            console.log('clicked');
+        li.addEventListener('click', async () => {
+            // console.log('clicked');
+            await completeTodo(todo.id);
             displayTodos();
         });
         todoList.append(li);
@@ -47,6 +57,6 @@ logoutButton.addEventListener('click', () => {
 
 deleteButton.addEventListener('click', async() => {
     // delete all todos
-
+    
     // then refetch and display the updated list of todos
 });
